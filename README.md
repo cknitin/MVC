@@ -515,3 +515,61 @@
     {
     
     }
+   
+  ## 18. ViewBag, ViewData and TempData
+  
+  ### ViewBag 
+  
+  Introduce in C# 4.0
+  Controller to View
+  Dynamic type property
+  Wrapper around ViewData
+  
+  Controller -
+      ViewBag.TotalStudentCount = 50;
+  
+  View -
+      @ViewBag.TotalStudentCount;
+  
+  ### ViewData
+  
+  Controller to View
+  Data persist in current http request
+  must be type cast before use
+  internally inserts data into ViewData dictionary
+  
+  Controller -
+  
+    ViewData.Add("Id", 1);
+    ViewData["Count"] = 10;
+    ViewData.Add(new KeyValuePair<string, object>("Age", 20));
+    
+  View -
+  
+   var x = ViewData["Count"] as int;
+  
+  ### TempData
+  
+  store data between two consecutive requests
+  one action method to another action method of the same or a different controller as well as redirects
+  TempDataDictionary type
+  internaly use Session to store the data
+  must be type cast before use
+  store only one time messages like error messages, validation messages.
+  TempData.Keep() to keep all the values of TempData in a third request.
+  
+  Aciton 1
+  
+      TempData["age"] = 20;
+  
+  Action 2
+      if(TempData.ContainsKey("age"))
+            userAge = int.Parse(TempData["age"].ToString());
+  
+  TempData.Keep(); < ---- Third request
+  
+  
+  
+  
+  
+  
