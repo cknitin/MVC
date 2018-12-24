@@ -526,10 +526,12 @@
   Wrapper around ViewData
   
   Controller -
-      ViewBag.TotalStudentCount = 50;
+        
+        ViewBag.TotalStudentCount = 50;
   
   View -
-      @ViewBag.TotalStudentCount;
+      
+        @ViewBag.TotalStudentCount;
   
   ### ViewData
   
@@ -546,7 +548,7 @@
     
   View -
   
-   var x = ViewData["Count"] as int;
+    var x = ViewData["Count"] as int;
   
   ### TempData
   
@@ -563,8 +565,9 @@
       TempData["age"] = 20;
   
   Action 2
+  
       if(TempData.ContainsKey("age"))
-            userAge = int.Parse(TempData["age"].ToString());
+              userAge = int.Parse(TempData["age"].ToString());
   
   TempData.Keep(); < ---- Third request
   
