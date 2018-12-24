@@ -350,6 +350,48 @@
   ## 9.       Caching
   ## 10.      Validations
   ## 11.      Areas
+  
+  ASP.NET MVC 2 introduced Area. Area helps the partition of large application into smaller units where each unit contains separate MVC   folder structure like Model,Views Controllers. Example, a large application may have different modules like Operations, Admin,           Accounts, HR, Sales etc. So area can have separate MVC folder structure for all these modules.
+  
+  Right click on MVC project in solutions ---> Add ----> Area (Name of the Area)
+  
+  Area registration
+  
+    public class marketingAreaRegistration : AreaRegistration 
+    {
+        public override string AreaName 
+        {
+            get 
+            {
+                return "marketing";
+            }
+        }
+
+        public override void RegisterArea(AreaRegistrationContext context) 
+        {
+            context.MapRoute(
+                "marketing_default",
+                "marketing/{controller}/{action}/{id}",
+                new { action = "Index", id = UrlParameter.Optional }
+            );
+        }
+    }
+    
+ In Global.ashx file
+ 
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        protected void Application_Start()
+        {
+            AreaRegistration.RegisterAllAreas();
+        }
+    }
+  
+  URL http://localhost/marketing/profile
+  
+  Physical located file - Areas/admin/controller/MarketingController folder
+  
+  
   ## 12.      Cookies
   ## 13.      Value Provider / Custom Value Provider
   ## 14.      handler
