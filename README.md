@@ -608,7 +608,7 @@
   How to create a custom view
   
   1. Implement IViewEngine Interface
-  2. 
+  But its not a best choice.  
   
   
 using System.Web.Mvc;
