@@ -571,6 +571,32 @@
   
   TempData.Keep(); < ---- Third request
   
+  ## 19. Types of Results
+  
+  1. ContentResult
+  2. EmptyResult
+  3. FileResult
+  4. JavaScriptResult
+  5. JsonResult
+  6. PartialViewResult
+  7. RedirectResult
+  8. RedirectToRouteResult -- Redirect to action using route name
+  9. ViewResult
+  
+     ### Custom Action Result
+  
+    using System.Web.Mvc;
+
+    namespace MVCAppDemo
+    {
+        public class CustomActionResult : ActionResult
+        {
+            public override void ExecuteResult(ControllerContext context)
+            {
+                // Add Custom Logics
+            }
+        }
+    }
   
   
   
