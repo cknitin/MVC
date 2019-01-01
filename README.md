@@ -583,7 +583,7 @@
   8. RedirectToRouteResult -- Redirect to action using route name
   9. ViewResult
   
-     ### Custom Action Result
+ ## 20. Custom Action Result
   
     using System.Web.Mvc;
 
@@ -598,7 +598,57 @@
         }
     }
   
+  ## 21. Create a custom view engine
+  
+   - Support different parsing process to the view
+   - Add additional content to view at the time of view creation
+   - To Change/Modifiy Default search location/directory of views
+   - Implement a more flexible path strategy to search a view
+  
+  How to create a custom view
+  
+  1. Implement IViewEngine Interface
+  2. 
   
   
+using System.Web.Mvc;
+
+    namespace MVCAppDemo
+    {
+        public class CustomViewEngine : RazorViewEngine
+        {
+
+            public CustomViewEngine()
+            {
+                this.PartialViewLocationFormats = new string[]
+                    {
+                        "~/views/partial/{0}.cshtml",
+                        "~/views/partial/{1}/{0}.cshtml"
+                    };
+
+                this.AreaMasterLocationFormats = base.ViewLocationFormats;
+
+                this.ViewLocationFormats = base.ViewLocationFormats;
+            }
+        }
+    }
+    
+    
+In Global.ashx
+    
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        protected void Application_Start()
+        {
+            AreaRegistration.RegisterAllAreas();
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            ControllerBuilder.Current.SetControllerFactory(new CustomControllerFactory());
+            DependencyResolver.SetResolver(new CustomDependencyResolver());
+
+
+            ViewEngines.Engines.Clear();  < --- Clear the View Engine
+            ViewEngines.Engines.Add(new CustomViewEngine()); < -- Added the custom Engine
+        }
+    }
   
   
