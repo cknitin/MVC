@@ -569,7 +569,23 @@
       if(TempData.ContainsKey("age"))
               userAge = int.Parse(TempData["age"].ToString());
   
-  TempData.Keep(); < ---- Third request
+  Keep Vs Peek
+  
+  Condition 1 (Not read):- Set a “Data” in action and if do not read it in your view then “Data” it'll be persisted for the next        request.
+
+  Condition 2 ( Normal Read) :- Read “Data” then it will not persist for the next request.
+
+    string str = TempData["Data”];
+  
+  Condition 3 (Read and Keep) :- Read “Data” and call the “Keep” it'll be persisted.
+
+    @TempData["Data"];
+    TempData.Keep("Data");
+    
+  Condition 4 ( Peek and Read) :- Read “Data” with the help of “Peek” it'll persist for the next request.
+
+    string strData = TempData.Peek("Td").ToString();
+  
   
   ## 19. Types of Results
   
